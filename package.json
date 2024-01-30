@@ -4,7 +4,7 @@
   "description": "learning nodejs",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon --env-file config.env server.js",
     "start:prod": "SET NODE_ENV=production&&nodemon server.js",
     "debug": "node --inspect server.js",
     "resetDB": "node dev-data/data/import-dev-data.js --reset",

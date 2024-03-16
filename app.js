@@ -1,5 +1,6 @@
 "use strict";
 
+const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
@@ -15,6 +16,11 @@ const userRouter = require("./routes/userRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
 
 const app = express();
+
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views")); //setting template engine for rendering
+
+app.use(express.static(path.join(__dirname, "public"))); //middleware to manage static files like imgs, js, css
 ////////////////////////////////////////// MIDDLEWARE USED FOR ALL REQUESTS
 app.use(helmet()); //middleware which sets security http headers
 
@@ -44,7 +50,6 @@ app.use(
     ],
   })
 ); //middleware for preventing parameter pollution
-app.use(express.static(`${__dirname}/public`)); //middleware to manage static files like imgs, js, css
 
 // app.use((req, res, next) => {
 //   req.requestTime = new Intl.DateTimeFormat("it-IT", {
@@ -57,6 +62,12 @@ app.use(express.static(`${__dirname}/public`)); //middleware to manage static fi
 // });
 
 ////////////////////////////////////////// ROUTES (MIDDLEWARE USED ONLY WHEN THESE ROUTES ARE REQUESTED)
+app.get("/", (req, res) => {
+  res.status(200).render("base", {
+    tour: "The Forest Hiker",
+    user: "Mattia",
+  });
+});
 
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/users", userRouter);

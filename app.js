@@ -15,7 +15,6 @@ const userRouter = require("./routes/userRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
 
 const app = express();
-
 ////////////////////////////////////////// MIDDLEWARE USED FOR ALL REQUESTS
 app.use(helmet()); //middleware which sets security http headers
 

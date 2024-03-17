@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "SET NODE_ENV=production&&nodemon --env-file config.env server.js",
-    "debug": "node --env-file config.env --enable-source-maps --inspect server.js",
+    "debug": "node --enable-source-maps --inspect server.js",
     "resetDB": "node dev-data/data/import-dev-data.js --reset",
     "importDB": "node dev-data/data/import-dev-data.js --import"
   },
